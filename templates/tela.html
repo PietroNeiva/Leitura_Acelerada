@@ -1,0 +1,27 @@
+{% extends "template.html" %}
+{% block conteudo %}
+        <table class="table table-striped table-responsive table-bordered">
+            <thead class="thead-default">
+                <tr>
+                    <th>Livro</th>
+                    <th>Autor</th>
+                    <th>Editora</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for livros in livro %}
+                <tr>
+                    <td>{{ livros.livro }}</td>
+                    <td>{{ livros.autor }}</td>
+                    <td>{{ livros.editora }}</td>
+                    <td>
+                        <a href="{{ url_for('leitura') }}">Leitura</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    <td>
+        <a href="{{ url_for('livros') }}">+ Cadastrar</a>
+    </td>
+{% endblock %}
