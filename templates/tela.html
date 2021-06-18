@@ -15,7 +15,7 @@
                     <td>{{ livros.autor }}</td>
                     <td>{{ livros.editora }}</td>
                     <td>
-                        <a href="{{ url_for('leitura') }}">Leitura</a>
+                        <a href="{{ url_for('leitura', id=livros.id) }}">Leitura</a>
                     </td>
                 </tr>
             {% endfor %}

@@ -4,7 +4,8 @@ app.secret_key = '1234'
 from models import Livros, Usuario
 import os
 app.config['UPLOAD_PATH'] = os.path.dirname(os.path.abspath(__file__)) + '/uploads'
-# import PyPDF2
+import PyPDF2
+import time
 import os
 
 liv1 = Livros('Dom Casmurro', 'Machado de Assis', 'Editora Garnier', '0')
@@ -73,9 +74,31 @@ def logout():
     flash('Nenhum usuário logado!')
     return redirect(url_for('index'))
 
-@app.route('/leitura')
-def leitura():
-    return render_template('leitura_dinamica.html')
+
+def recupera_pdf(id):
+    for nome_arquivo in os.listdir(app.config['UPLOAD_PATH']):
+        if f'livro{id}' in nome_arquivo:
+            return nome_arquivo
+
+
+@app.route('/leitura/<int:id>')
+def leitura(id):
+    #arquivo = recupera_pdf(id)
+    pdf_file = open(f'uploads/livro{id}.pdf', 'rb')
+    read_pdf = PyPDF2.PdfFileReader(pdf_file, strict=False)
+    number_of_pages = read_pdf.getNumPages()
+    page = read_pdf.getPage(0)
+    page_content = page.extractText()
+    parsed = ''.join(page_content)
+    lista_de_palavras = parsed.split(" ")
+    #print("começa aqui")
+    #for palavra in lista_de_palavras:
+     #   print("começo do laço aqui")
+     #   print(palavra)
+     #   print("fim do laço aqui")
+     #   time.sleep(1)
+    #print("chegou aqui")
+    return render_template('leitura_dinamica.html', arquivo = lista_de_palavras)
 
 
 if __name__ == "__main__":
