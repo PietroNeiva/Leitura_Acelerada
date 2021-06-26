@@ -91,13 +91,14 @@ def leitura(id):
     page_content = page.extractText()
     parsed = ''.join(page_content)
     lista_de_palavras = parsed.split(" ")
+    lista_de_palavras = [line.strip() for line in lista_de_palavras if line.strip() != ""]
     #print("começa aqui")
-    #for palavra in lista_de_palavras:
-     #   print("começo do laço aqui")
-     #   print(palavra)
-     #   print("fim do laço aqui")
-     #   time.sleep(1)
-    #print("chegou aqui")
+    for palavra in lista_de_palavras:
+    #    print("começo do laço aqui")
+        print(palavra)
+    #    print("fim do laço aqui")
+        time.sleep(0)
+    print("chegou aqui")
     return render_template('leitura_dinamica.html', arquivo = lista_de_palavras)
 
 
