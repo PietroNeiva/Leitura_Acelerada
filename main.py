@@ -75,15 +75,8 @@ def logout():
     return redirect(url_for('index'))
 
 
-def recupera_pdf(id):
-    for nome_arquivo in os.listdir(app.config['UPLOAD_PATH']):
-        if f'livro{id}' in nome_arquivo:
-            return nome_arquivo
-
-
 @app.route('/leitura/<int:id>')
 def leitura(id):
-    #arquivo = recupera_pdf(id)
     pdf_file = open(f'uploads/livro{id}.pdf', 'rb')
     read_pdf = PyPDF2.PdfFileReader(pdf_file, strict=False)
     number_of_pages = read_pdf.getNumPages()
@@ -92,13 +85,9 @@ def leitura(id):
     parsed = ''.join(page_content)
     lista_de_palavras = parsed.split(" ")
     lista_de_palavras = [line.strip() for line in lista_de_palavras if line.strip() != ""]
-    #print("começa aqui")
     for palavra in lista_de_palavras:
-    #    print("começo do laço aqui")
         print(palavra)
-    #    print("fim do laço aqui")
         time.sleep(0)
-    print("chegou aqui")
     return render_template('leitura_dinamica.html', arquivo = lista_de_palavras)
 
 
