@@ -9,8 +9,7 @@ import time
 import os
 
 liv1 = Livros('Dom Casmurro', 'Machado de Assis', 'Editora Garnier', '0')
-liv2 = Livros('Brás Cubas', 'Machado de Assis', 'Departamento do livro', '1')
-tela = [liv1, liv2]
+tela = [liv1]
 
 usuario1 = Usuario('pietro', 'Pietro Nazar', '1234')
 
